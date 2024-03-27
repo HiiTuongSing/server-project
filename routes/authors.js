@@ -40,12 +40,11 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Display Author & Their Books
 router.get("/:id", async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
-    console.log(author);
     const books = await Book.find({ author: author._id }).limit(6).exec();
-    console.log(books.length);
     res.render("authors/show", {
       author: author,
       booksByAuthor: books,
@@ -56,6 +55,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Edit Author
 router.get("/:id/edit", async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
